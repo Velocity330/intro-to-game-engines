@@ -1,31 +1,29 @@
 [gd_scene format=3 uid="uid://cc2lkerlx1i8v"]
 
 [ext_resource type="Script" uid="uid://du1hl7nykayol" path="res://scripts/slime.gd" id="1_n6pvg"]
-[ext_resource type="Texture2D" uid="uid://dqw5juce8sie2" path="res://assets/2D Resources/brackeys_platformer_assets/sprites/slime_green.png" id="1_p2gj0"]
 [ext_resource type="PackedScene" uid="uid://bc8rs8an6scnj" path="res://scenes/killzone.tscn" id="2_n6pvg"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pjw23"]
-atlas = ExtResource("1_p2gj0")
-region = Rect2(0, 24, 24, 24)
+[ext_resource type="Texture2D" uid="uid://cmaqn2nqd58xl" path="res://assets/2D Resources/brackeys_platformer_assets/sprites/slime_purple.png" id="2_pjw23"]
+[ext_resource type="Script" uid="uid://bopgpbivqnnxo" path="res://scripts/goomba_head.gd" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2npkn"]
-atlas = ExtResource("1_p2gj0")
-region = Rect2(24, 24, 24, 24)
+atlas = ExtResource("2_pjw23")
+region = Rect2(0, 24, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
-atlas = ExtResource("1_p2gj0")
-region = Rect2(48, 24, 24, 24)
+atlas = ExtResource("2_pjw23")
+region = Rect2(24, 24, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
-atlas = ExtResource("1_p2gj0")
+atlas = ExtResource("2_pjw23")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5wyi"]
+atlas = ExtResource("2_pjw23")
 region = Rect2(72, 24, 24, 24)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_v5wyi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_0l8pv"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pjw23")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2npkn")
 }, {
@@ -34,6 +32,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gstla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5wyi")
 }],
 "loop": true,
 "name": &"default",
@@ -41,28 +42,41 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0l8pv"]
-size = Vector2(10, 12)
+size = Vector2(17, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjw23"]
+size = Vector2(22, 8)
 
 [node name="Slime" type="Node2D" unique_id=1476498566]
 script = ExtResource("1_n6pvg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1777039994]
-position = Vector2(0, -12)
-sprite_frames = SubResource("SpriteFrames_v5wyi")
+position = Vector2(0, -20)
+scale = Vector2(1.7083334, 1.7083334)
+sprite_frames = SubResource("SpriteFrames_0l8pv")
 autoplay = "default"
-frame_progress = 0.9112188
 flip_h = true
 
 [node name="Killzone" parent="." unique_id=186774506 instance=ExtResource("2_n6pvg")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=43309154]
-position = Vector2(0, -6)
+position = Vector2(-0.5, -5.5)
 shape = SubResource("RectangleShape2D_0l8pv")
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=1945804675]
 position = Vector2(0, -6)
-target_position = Vector2(7, 0)
+target_position = Vector2(12, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1837593780]
 position = Vector2(0, -6)
-target_position = Vector2(-7, 0)
+target_position = Vector2(-11, 0)
+
+[node name="GoombaHead" type="Area2D" parent="." unique_id=1124383561]
+collision_mask = 2
+script = ExtResource("4_pjw23")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoombaHead" unique_id=659369862]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_pjw23")
+
+[connection signal="body_entered" from="GoombaHead" to="GoombaHead" method="_on_body_entered"]

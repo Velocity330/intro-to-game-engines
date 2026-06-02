@@ -8,6 +8,12 @@ var direction = 1
 @onready var ray_cast_left = $RayCastLeft
 @onready var animated_sprite2d = $AnimatedSprite2D
 
+@export var max_health : int = 3
+var current_health : int
+
+func _ready() -> void:
+	max_health = current_health
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if ray_cast_right.is_colliding():
@@ -17,3 +23,7 @@ func _process(delta):
 		direction = 1
 		animated_sprite2d.flip_h = false
 	position.x += direction * SPEED * delta
+	
+
+func take_damage(damage : float):
+	current_health -= damage

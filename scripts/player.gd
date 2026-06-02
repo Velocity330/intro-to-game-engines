@@ -6,6 +6,9 @@ const JUMP_VELOCITY = -400.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+@export var max_health : int = 3
+var current_health : int
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -40,3 +43,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+func take_damage(damage : int, hit_pos: Vector2):
+	var hit_direction : Vector2 = -global_position.direction_to(global_position)
+	velocity += hit_direction * 2
+	current_health -= damage

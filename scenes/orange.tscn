@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://flnp3qswvr2h"]
+
+[ext_resource type="Texture2D" uid="uid://c61050tldouwl" path="res://assets/2D Resources/brackeys_platformer_assets/sprites/fruit.png" id="1_fxgmd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dinhu"]
+radius = 7.0
+
+[node name="Orange" type="Area2D" unique_id=1711018190]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=650181973]
+position = Vector2(-1, 0)
+scale = Vector2(1.03125, 1)
+texture = ExtResource("1_fxgmd")
+region_enabled = true
+region_rect = Rect2(0, 49, 15, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1887066440]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_dinhu")
+debug_color = Color(0.9259013, 0.20017168, 0.4714626, 0.41960785)

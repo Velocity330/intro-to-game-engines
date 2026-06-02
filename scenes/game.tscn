@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cc2lkerlx1i8v" path="res://scenes/slime.tscn" id="6_p57ef"]
 [ext_resource type="FontFile" uid="uid://bix114sdig3ao" path="res://assets/2D Resources/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dmsu4bdl28xlu" path="res://scenes/music.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://flnp3qswvr2h" path="res://scenes/orange.tscn" id="11_dinhu"]
+[ext_resource type="Script" uid="uid://ew0j0smv0j51" path="res://scripts/orange.gd" id="12_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -322,7 +324,10 @@ libraries/ = SubResource("AnimationLibrary_kvpfn")
 autoplay = &"RESET"
 
 [node name="Slime" parent="." unique_id=1476498566 instance=ExtResource("6_p57ef")]
-position = Vector2(642, 32)
+position = Vector2(65, -464)
+
+[node name="Slime2" parent="." unique_id=1088807259 instance=ExtResource("6_p57ef")]
+position = Vector2(637, 32)
 
 [node name="Labels" type="Node" parent="." unique_id=469493601]
 
@@ -368,10 +373,10 @@ text = "Great job!"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label5" type="Label" parent="Labels" unique_id=1095543480]
-offset_left = -907.0
-offset_top = -516.0
-offset_right = -735.0
-offset_bottom = -460.0
+offset_left = -916.0
+offset_top = -520.0
+offset_right = -744.0
+offset_bottom = -464.0
 theme_override_colors/font_color = Color(0.11764706, 0.15294118, 0.49411765, 1)
 theme_override_fonts/font = ExtResource("8_0tnpc")
 theme_override_font_sizes/font_size = 8
@@ -380,3 +385,21 @@ the end?"
 metadata/_edit_use_anchors_ = true
 
 [node name="Music" parent="." unique_id=679264354 instance=ExtResource("10_vtaks")]
+
+[node name="Fruits" type="Node" parent="." unique_id=1622694457]
+
+[node name="Orange" parent="Fruits" unique_id=1711018190 instance=ExtResource("11_dinhu")]
+position = Vector2(-452, -240)
+script = ExtResource("12_kvuet")
+
+[node name="Orange2" parent="Fruits" unique_id=84529766 instance=ExtResource("11_dinhu")]
+position = Vector2(-852, -321)
+script = ExtResource("12_kvuet")
+
+[node name="Orange3" parent="Fruits" unique_id=1886881006 instance=ExtResource("11_dinhu")]
+position = Vector2(-450, -529)
+script = ExtResource("12_kvuet")
+
+[connection signal="body_entered" from="Fruits/Orange" to="Fruits/Orange" method="_on_body_entered"]
+[connection signal="body_entered" from="Fruits/Orange2" to="Fruits/Orange2" method="_on_body_entered"]
+[connection signal="body_entered" from="Fruits/Orange3" to="Fruits/Orange3" method="_on_body_entered"]
