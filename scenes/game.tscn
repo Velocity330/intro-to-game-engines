@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dmsu4bdl28xlu" path="res://scenes/music.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://flnp3qswvr2h" path="res://scenes/orange.tscn" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://ew0j0smv0j51" path="res://scripts/orange.gd" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://d8t6lr6gsbft" path="res://scenes/menu.gd" id="13_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -226,6 +227,13 @@ _data = {
 &"moveplatform": SubResource("Animation_vtaks")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.3392929, 0.5923558, 1, 1)
+
 [node name="Game" type="Node2D" unique_id=1091685326]
 position = Vector2(-886, -6)
 
@@ -259,7 +267,7 @@ layer_2/tile_data = PackedInt32Array(-1507329, 524288, 3)
 
 [node name="Player" parent="." unique_id=934755897 instance=ExtResource("1_uwrxv")]
 z_index = 5
-position = Vector2(64, -15)
+position = Vector2(66, -5)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1521020979]
 position = Vector2(0, -7)
@@ -400,6 +408,43 @@ script = ExtResource("12_kvuet")
 position = Vector2(-450, -529)
 script = ExtResource("12_kvuet")
 
+[node name="Menu" type="Control" parent="." unique_id=2101220583]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 462.0
+offset_top = -71.0
+offset_right = 502.0
+offset_bottom = -31.0
+script = ExtResource("13_kvuet")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu" unique_id=1080205080]
+layout_mode = 0
+offset_left = -439.0
+offset_top = 9.0
+offset_right = -353.0
+offset_bottom = 115.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Menu/MarginContainer" unique_id=269141413]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kvuet")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/PanelContainer" unique_id=2003045072]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Play" type="Button" parent="Menu/MarginContainer/PanelContainer/VBoxContainer" unique_id=1013727883]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+text = "Start"
+
+[node name="Quit" type="Button" parent="Menu/MarginContainer/PanelContainer/VBoxContainer" unique_id=1438007240]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
+
 [connection signal="body_entered" from="Fruits/Orange" to="Fruits/Orange" method="_on_body_entered"]
 [connection signal="body_entered" from="Fruits/Orange2" to="Fruits/Orange2" method="_on_body_entered"]
 [connection signal="body_entered" from="Fruits/Orange3" to="Fruits/Orange3" method="_on_body_entered"]
+[connection signal="pressed" from="Menu/MarginContainer/PanelContainer/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/PanelContainer/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
